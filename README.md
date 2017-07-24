@@ -1,4 +1,4 @@
-# ![alt text](https://github.com/adam-p/markdown-here/raw/master/src/common/images/icon48.png "Logo") Laravel-Shoutbox
+# ![alt text](http://i.imgur.com/wPpShgV.png "Logo") Laravel-Shoutbox
 
 
 **Routes:**
@@ -15,7 +15,7 @@ Route::group(['prefix' => 'shoutbox'], function () {
 ```
 //ShoutBox Block
 $shoutboxItems = Cache::remember('shoutbox_messages', 60, function () {
-    return Shoutbox::orderBy('created_at', 'desc')->take(100)->get();
+    return Shoutbox::orderBy('created_at', 'desc')->take(150)->get();
 });
 $shoutboxItems = $shoutboxItems->reverse();
 ```
@@ -42,13 +42,13 @@ $shoutboxItems = $shoutboxItems->reverse();
               <div class="profile-avatar tiny pull-left" style="background-image: url(/img/profil.png);"></div>
               <h5 class="list-group-item-heading"><a href="{{ route('profil', array('username' => $messages->poster->username, 'id' => $messages->poster->id)) }}">{{ $messages->poster->username }}</a><span class="badge-extra text-bold" style="color:{{ $messages->poster->group->color }}">{{ $messages->poster->group->name }}</span></h5>
               <p class="message-content">
-                <time>{{ $messages->created_at->diffForHumans() }}</time>@emojione($messages->message)</p>
+                <time>{{ $messages->created_at->diffForHumans() }}</time>@emojione($messages->message->getMessageHtml())</p>
             </li>
             @endforeach
         </ul>
       </div>
       <div class="panel-footer ">
-      <span class="badge-extra">Type <strong>:</strong> for emoji</span>
+      <span class="badge-extra">Type <strong>:</strong> for emoji</span> <span class="badge-extra">BBCode Is Allowed</span>
         <div class="form-group">
           <textarea class="form-control" id="chat-message"></textarea>
           <p id="chat-error" class="hidden text-danger"></p>
