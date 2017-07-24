@@ -1,7 +1,7 @@
 # Laravel-Shoutbox
-A Basic Laravel Shoutbox Where Members Can Chat
+![alt text](https://github.com/adam-p/markdown-here/raw/master/src/common/images/icon48.png "Logo") A Basic Laravel Shoutbox Where Members Can Chat
 
-Routes:
+**Routes:**
 ```
 // Shoutbox
 Route::group(['prefix' => 'shoutbox'], function () {
@@ -11,7 +11,7 @@ Route::group(['prefix' => 'shoutbox'], function () {
 });
 ```
 
-Add To HomeController:
+**Add To HomeController:**
 ```
 //ShoutBox Block
 $shoutboxItems = Cache::remember('shoutbox_messages', 60, function () {
@@ -20,7 +20,7 @@ $shoutboxItems = Cache::remember('shoutbox_messages', 60, function () {
 $shoutboxItems = $shoutboxItems->reverse();
 ```
 
-View:
+**View:**
 ```
 <!-- ShoutBox -->
 <div class="col-md-10 col-sm-10 col-md-offset-1">
@@ -59,7 +59,7 @@ if (in_array(\Auth::user()->id, explode(',', $messages->mentions))) {
 <!-- /ShoutBox -->
 ```
 
-CSS:
+**CSS:**
 ```
 .shoutbox {
   width: 100%;
