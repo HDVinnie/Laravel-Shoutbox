@@ -1,5 +1,5 @@
-# Laravel-Shoutbox
-![alt text](https://github.com/adam-p/markdown-here/raw/master/src/common/images/icon48.png "Logo") A Basic Laravel Shoutbox Where Members Can Chat
+![alt text](https://github.com/adam-p/markdown-here/raw/master/src/common/images/icon48.png "Logo") # Laravel-Shoutbox
+
 
 **Routes:**
 ```
@@ -33,11 +33,11 @@ $shoutboxItems = $shoutboxItems->reverse();
         <ul class="list-group">
           @foreach($shoutboxItems as $messages)
           <?php
-$class = '';
-if (in_array(\Auth::user()->id, explode(',', $messages->mentions))) {
-    $class = 'mentioned';
-}
-?>
+          $class = '';
+          if (in_array(\Auth::user()->id, explode(',', $messages->mentions))) {
+            $class = 'mentioned';
+          }
+          ?>
             <li class="list-group-item {{ $class }}">
               <div class="profile-avatar tiny pull-left" style="background-image: url(/img/profil.png);"></div>
               <h5 class="list-group-item-heading"><a href="{{ route('profil', array('username' => $messages->poster->username, 'id' => $messages->poster->id)) }}">{{ $messages->poster->username }}</a><span class="badge-extra text-bold" style="color:{{ $messages->poster->group->color }}">{{ $messages->poster->group->name }}</span></h5>
