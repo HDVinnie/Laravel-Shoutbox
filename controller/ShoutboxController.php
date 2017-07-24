@@ -90,7 +90,7 @@ class ShoutboxController extends Controller
       }
         $data[] = '<li class="list-group-item ' . $class . '">
         <div class="profile-avatar tiny pull-left" style="background-image: url(/img/profil.png);"></div>
-        <h5 class="list-group-item-heading"><a href="{{ route("profil", array("username" => '. e($messages->poster->username) .', "id" => '. e($messages->poster->id) .')) }}">' . e($messages->poster->username) . '</a><span class="badge-extra text-bold" style="color:' . ($messages->poster->group->color) . '">' . ($messages->poster->group->name) . '</span></h5>
+        <h5 class="list-group-item-heading"><a href="{!! route("profil", array("username" => '. e($messages->poster->username) .', "id" => '. e($messages->poster->id) .')) !!}">' . e($messages->poster->username) . '</a><span class="badge-extra text-bold" style="color:' . ($messages->poster->group->color) . '">' . ($messages->poster->group->name) . '</span></h5>
         <p class="message-content"><time>' . ($messages->created_at->diffForHumans()) . '</time>' . \LaravelEmojiOne::toImage(e($messages->message->getMessageHtml())) . '</p>
         </li>';
       }
