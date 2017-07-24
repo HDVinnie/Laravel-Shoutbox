@@ -57,7 +57,8 @@ class ShoutboxController extends Controller
 
       $data = '<li class="list-group-item">
       <div class="profile-avatar tiny pull-left" style="background-image: url(/img/profil.png);"></div>
-      <h5 class="list-group-item-heading"><a href="#">' . Auth::user()->username . '</a></h5><p class="message-content"><time>' . date("H:i", time()) . '</time>' . e(Request::get('message')) . '</p>
+      <h5 class="list-group-item-heading"><a href=\'https://blutopia.xyz/members/'.Auth::user()->username. '/'.Auth::user()->id.'\'>' . Auth::user()->username . '</a><span class="badge-extra text-bold" style="color:' . (Auth::user()->group->color) . '">' . (Auth::user()->group->name) . '</span></h5>
+      <p class="message-content"><time>' . Carbon::now()->diffForHumans() . '</time>' . e(Request::get('message')) . '</p>
       </li>';
 
       Cache::forget('shoutbox_messages');
@@ -88,11 +89,10 @@ class ShoutboxController extends Controller
       {
         $class = 'mentioned';
       }
-        $data[] = '<li class="list-group-item ' . $class . '">
-        <div class="profile-avatar tiny pull-left" style="background-image: url(/img/profil.png);"></div>
-        <h5 class="list-group-item-heading"><a href="{!! route("profil", array("username" => '. e($messages->poster->username) .', "id" => '. e($messages->poster->id) .')) !!}">' . e($messages->poster->username) . '</a><span class="badge-extra text-bold" style="color:' . ($messages->poster->group->color) . '">' . ($messages->poster->group->name) . '</span></h5>
-        <p class="message-content"><time>' . ($messages->created_at->diffForHumans()) . '</time>' . \LaravelEmojiOne::toImage(e($messages->message->getMessageHtml())) . '</p>
-        </li>';
+      $data[] = '<li class="list-group-item ' . $class . '">
+                      <div class="profile-avatar tiny pull-left" style="background-image: url(/img/profil.png);"></div>
+                      <h5 class="list-group-item-heading"><a href=\'https://blutopia.xyz/members/'.e($messages->poster->username). '/'.e($messages->poster->id).'\'>' . e($messages->poster->username) . '</a><span class="badge-extra text-bold" style="color:' . ($messages->poster->group->color) . '">' . ($messages->poster->group->name) . '</span></h5>
+                      <p class="message-content"><time>' . ($messages->created_at->diffForHumans()) . '</time>' . \LaravelEmojiOne::toImage(e($messages->message)) . '</p></li>';
       }
       return Response::json(['success' => true, 'data' => $data]);
     }
